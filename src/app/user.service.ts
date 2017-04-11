@@ -100,6 +100,10 @@ export class UserService {
       let userFriendsList = this.af.database.list('registeredUsers/' + userUid + "/friends");
       // userFriendsList.push({key: pushObj.key});--move to accept friend req
     });
+<<<<<<< HEAD
+=======
+
+>>>>>>> friends
 
     // acceptFriendRequest(userUid, friendId) {
     //    let userFriendsList = this.af.database.list('registeredUsers' + userUid + "/friends");
@@ -121,6 +125,10 @@ export class UserService {
     //   let friendsFriendsList = this.af.database.list('registeredUsers' + friendUid + "/friends");
 
     //   friendsFriendsList.push(friendEntry.$key);
+<<<<<<< HEAD
+=======
+
+>>>>>>> friends
   }
 
   sendMessage(newMessage, friendName, userName, friendsUid){
@@ -198,5 +206,20 @@ export class UserService {
 
 
 
+  checkIfMutualFriends(userLists, friendsList){
+    for(let i = 0; i < userLists.length; i++){
+      for(let j = 0; j <friendsList.length; j++ ){
+        if(userLists[i].key === friendsList[j].key){
+          return userLists[i].key;
+        }
+      }
+      // console.log("Check:" + userLists[i].key);
+      // if(friendsList.includes(userLists[i].key)){
+      //   console.log("Matched:" + userLists[i]);
+      //   return this.af.database.list('friends/' + userLists[i]);
+      // }
+    }
+    return "no matching";
+  }
 
 }
