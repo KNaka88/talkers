@@ -25,7 +25,6 @@ export class UserComponent implements OnInit {
   public friendsUid: string;
   users: FirebaseListObservable<any[]>;
   usersFriends: FirebaseListObservable<any[]>;
-
   public infoWindow: boolean = false;
 
   constructor(

@@ -91,15 +91,20 @@ export class UserService {
   sendFriendRequest(userUid, friendUid) {
     let pushObj = {
       friend1Id: userUid,
-      friend2Id: friendUid
+      friend2Id: friendUid,
+      requestStatus: "pending"
     };
     let fbFriends = this.af.database.list('friends');
     fbFriends.push(pushObj).then((pushObj) => {
       console.log("this is the push id key: " +pushObj.key);
       let userFriendsList = this.af.database.list('registeredUsers/' + userUid + "/friends");
-      userFriendsList.push({key: pushObj.key});
+      // userFriendsList.push({key: pushObj.key});--move to accept friend req
     });
 
+    // acceptFriendRequest(userUid, friendId) {
+    //    let userFriendsList = this.af.database.list('registeredUsers' + userUid + "/friends");
+    //    return this.af.database.object('registerUsers/' + friendId)
+    // }
 
 
 
@@ -190,6 +195,8 @@ export class UserService {
       })
     });
   }
+
+
 
 
 }
