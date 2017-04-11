@@ -100,7 +100,6 @@ export class UserService {
       let userFriendsList = this.af.database.list('registeredUsers/' + userUid + "/friends");
       // userFriendsList.push({key: pushObj.key});--move to accept friend req
     });
-<<<<<<< HEAD
 
     // acceptFriendRequest(userUid, friendId) {
     //    let userFriendsList = this.af.database.list('registeredUsers' + userUid + "/friends");
@@ -122,8 +121,6 @@ export class UserService {
     //   let friendsFriendsList = this.af.database.list('registeredUsers' + friendUid + "/friends");
 
     //   friendsFriendsList.push(friendEntry.$key);
-=======
->>>>>>> upstream/master
   }
 
   sendMessage(newMessage, friendName, userName, friendsUid){
@@ -143,35 +140,63 @@ export class UserService {
     });
   }
 
+  // getFriendsUid(userUid, friendUid){
+  //   //get friendsUid list of user
+  //   this.af.database.list('registeredUsers/' + userUid + '/friends', { preserveSnapshot: true })
+  //   .subscribe( (snapshots) => {
+  //     snapshots.forEach(snapshot => {
+  //       this.friendsListOfUser = snapshot.key;
+  //     })
+  //   });
+  //
+  //   //get friendsUid list of friend
+  //   this.af.database.list('registeredUsers/' + friendUid + '/friends', { preserveSnapshot: true })
+  //   .subscribe( (snapshots) => {
+  //     snapshots.forEach(snapshot => {
+  //       this.friendsListOfFriend = snapshot.key;
+  //     })
+  //   });
+  //
+  //
+  //   //check if they have same uid
+  //   let friendsUid = '';
+  //
+  //   for(let i; i < this.friendsListOfUser.length; i++){
+  //     console.log("Check:" + this.friendsListOfUser[i]);
+  //     if(this.friendsListOfFriend.includes(this.friendsListOfUser[i])){
+  //       console.log("Matched:" + this.friendsListOfUser[i]);
+  //       friendsUid = this.friendsListOfUser[i];
+  //       break;
+  //     }
+  //     console.log("no matching");
+  //   }
+  //   return friendsUid;
+  // }
+
   getUserFriendsUid(userUid){
+    console.log("start");
     //get friendsUid list of user
-    return this.af.database.list('registeredUsers/' + userUid + '/friends');
-    }
+    this.af.database.list('registeredUsers/' + userUid + '/friends', { preserveSnapshot: true })
+    .subscribe( (snapshots) => {
+      snapshots.forEach(snapshot => {
+        console.log("inside");
+        this.friendsListOfUser = snapshot.key;
+      })
+    });
+  }
 
   getFriendFriendsUid(friendUid){
     //get friendsUid list of friend
-    return this.af.database.list('registeredUsers/' + friendUid + '/friends');
+    this.af.database.list('registeredUsers/' + friendUid + '/friends', { preserveSnapshot: true })
+    .subscribe( (snapshots) => {
+      snapshots.forEach(snapshot => {
+        console.log("inside2");
+        this.friendsListOfFriend = snapshot.key;
+      })
+    });
   }
 
-<<<<<<< HEAD
 
 
 
-=======
-  checkIfMutualFriends(userLists, friendsList){
-    for(let i = 0; i < userLists.length; i++){
-      for(let j = 0; j <friendsList.length; j++ ){
-        if(userLists[i].key === friendsList[j].key){
-          return userLists[i].key;
-        }
-      }
-      // console.log("Check:" + userLists[i].key);
-      // if(friendsList.includes(userLists[i].key)){
-      //   console.log("Matched:" + userLists[i]);
-      //   return this.af.database.list('friends/' + userLists[i]);
-      // }
-    }
-    return "no matching";
-  }
->>>>>>> upstream/master
 }
